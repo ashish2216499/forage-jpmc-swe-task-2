@@ -1,9 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+test('renders a heading and handles user interaction', () => {
+  render(<App />);
+
+  // Assertions
+  const headingElement = screen.getByRole('heading');
+  expect(headingElement).toBeInTheDocument();
+  expect(headingElement).toHaveTextContent('My App');
+
+  // Simulate user interaction (optional)
+  // const buttonElement = screen.getByRole('button');
+  // userEvent.click(buttonElement);
+  // expect(screen.getByText('Clicked')).toBeInTheDocument();
 });
